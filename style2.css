@@ -1,35 +1,22 @@
-/* 新しいスタンプ用CSS */
-.stamps {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 1rem;
-}
-
+/* スタンプボタン */
 .stamp-btn {
-  width: 60px;
-  height: 60px;
+  width: 100px;           /* 横幅拡大 */
+  height: 100px;          /* 高さ拡大 */
   border-radius: 50%;
-  border: 2px dashed #ccc;
+  border: 3px dashed #ccc; /* 太めの枠線 */
   background: white;
   cursor: not-allowed;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;        /* 文字サイズ拡大 */
   transition: all 0.3s;
 }
 
-.stamp-btn.active {
-  background-color: #ffb347;
-  border: none;
-  color: white;
-}
-
+/* 景品ボタン */
 #reward-btn {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 18px;
-  border-radius: 5px;
+  margin-top: 2rem;
+  padding: 1rem 2rem;     /* 高さと横幅を拡大 */
+  font-size: 24px;        /* 文字サイズ拡大 */
+  border-radius: 10px;
   border: none;
   background-color: #ccc;
   color: white;
