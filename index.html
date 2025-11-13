@@ -3,49 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>スタンプラリー</title>
-  <!-- 外部CSS読み込み -->
-  <link rel="stylesheet" href="style1.css">
-  <link rel="stylesheet" href="style2.css">
+  <title>ショッピングセンター スタンプラリー</title>
+  <link rel="stylesheet" href="style.css">   <!-- 既存のCSS -->
+  <link rel="stylesheet" href="style2.css">  <!-- 新しいCSS -->
 </head>
 <body>
-  <h1>スタンプラリー</h1>
+  <header>
+    <h1>ショッピングセンター スタンプラリー</h1>
+  </header>
 
-  <div class="stamp-container">
-    <div class="stamp" data-index="1">①</div>
-    <div class="stamp" data-index="2">②</div>
-    <div class="stamp" data-index="3">③</div>
-    <div class="stamp" data-index="4">④</div>
-    <div class="stamp" data-index="5">⑤</div>
-    <div class="stamp" data-index="6">⑥</div>
-  </div>
+  <main>
+    <section class="intro">
+      <h2>ようこそ！</h2>
+      <p>館内各所のQRコードを読み取ってスタンプを集めよう！</p>
+      <p>全スタンプを集めると、ボタンを押して景品をゲットできます🎁</p>
+    </section>
 
-  <button id="completeBtn" class="complete-button" disabled>ゴール！</button>
+    <section class="stamp-status">
+      <h2>あなたのスタンプ状況</h2>
+      <div id="stamp-container" class="stamps">
+        <!-- スタンプボタンはJSで生成 -->
+      </div>
+      <button id="reward-btn" disabled>景品を受け取る</button>
+    </section>
 
-  <script>
-    const stamps = document.querySelectorAll('.stamp');
-    const completeBtn = document.getElementById('completeBtn');
-    let collectedCount = 0;
+    <section class="howto">
+      <h2>参加方法</h2>
+      <ol>
+        <li>館内の各店舗に設置されたQRコードを読み取る</li>
+        <li>このページが開いたらスタンプが追加されます！</li>
+        <li>全て集めたら「景品を受け取る」ボタンを押しましょう✨</li>
+      </ol>
+    </section>
+  </main>
 
-    stamps.forEach(stamp => {
-      stamp.addEventListener('click', () => {
-        if (!stamp.classList.contains('collected')) {
-          stamp.classList.add('collected');
-          collectedCount++;
+  <footer>
+    <p>© ショッピングセンター スタンプラリー</p>
+  </footer>
 
-          if (collectedCount === stamps.length) {
-            completeBtn.classList.add('active');
-            completeBtn.disabled = false;
-          }
-        }
-      });
-    });
-
-    completeBtn.addEventListener('click', () => {
-      if (!completeBtn.disabled) {
-        alert('スタンプが全て揃いました！おめでとう！🎉');
-      }
-    });
-  </script>
+  <script src="script2.js"></script> <!-- 新しいJS -->
 </body>
 </html>
