@@ -1,0 +1,58 @@
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  margin: 0;
+  background: #fff8f0;
+  color: #333;
+  text-align: center;
+}
+
+header {
+  background-color: #ff8a00;
+  color: white;
+  padding: 1rem;
+}
+
+h1, h2 {
+  margin: 0.5em 0;
+}
+
+.intro, .stamp-status, .howto {
+  padding: 1.5rem;
+  background: white;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.stamps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.stamp {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.stamp.active {
+  background-color: #ffb347;
+  border: none;
+  color: white;
+}
+
+footer {
+  background: #444;
+  color: white;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
