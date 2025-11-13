@@ -3,40 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ショッピングセンター スタンプラリー</title>
-  <link rel="stylesheet" href="style.css">
+  <title>スタンプラリー</title>
+  <!-- 外部CSS読み込み -->
+  <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-  <header>
-    <h1>ショッピングセンター スタンプラリー</h1>
-  </header>
+  <h1>スタンプラリー</h1>
 
-  <main>
-    <section class="intro">
-      <h2>ようこそ！</h2>
-      <p>館内各所のQRコードを読み取ってスタンプを集めよう！</p>
-      <p>全スタンプを集めると、素敵なプレゼントがもらえるよ🎁</p>
-    </section>
+  <div class="stamp-container">
+    <div class="stamp" data-index="1">①</div>
+    <div class="stamp" data-index="2">②</div>
+    <div class="stamp" data-index="3">③</div>
+    <div class="stamp" data-index="4">④</div>
+    <div class="stamp" data-index="5">⑤</div>
+    <div class="stamp" data-index="6">⑥</div>
+  </div>
 
-    <section class="stamp-status">
-      <h2>あなたのスタンプ状況</h2>
-      <div id="stamp-container" class="stamps"></div>
-    </section>
+  <button id="completeBtn" class="complete-button" disabled>ゴール！</button>
 
-    <section class="howto">
-      <h2>参加方法</h2>
-      <ol>
-        <li>館内の各店舗に設置されたQRコードを読み取る</li>
-        <li>このページが開いたらスタンプが追加されます！</li>
-        <li>全て集めたら景品カウンターでプレゼントをゲット✨</li>
-      </ol>
-    </section>
-  </main>
+  <script>
+    const stamps = document.querySelectorAll('.stamp');
+    const completeBtn = document.getElementById('completeBtn');
+    let collectedCount = 0;
 
-  <footer>
-    <p>© ショッピングセンター スタンプラリー</p>
-  </footer>
+    stamps.forEach(stamp => {
+      stamp.addEventListener('click', () => {
+        if (!stamp.classList.contains('collected')) {
+          stamp.classList.add('collected');
+          collectedCount++;
 
-  <script src="script.js"></script>
+          if (collectedCount === stamps.length) {
+            completeBtn.classList.add('active');
+            completeBtn.disabled = false;
+          }
+        }
+      });
+    });
+
+    completeBtn.addEventListener('click', () => {
+      if (!completeBtn.disabled) {
+        alert('スタンプが全て揃いました！おめでとう！🎉');
+      }
+    });
+  </script>
 </body>
 </html>
