@@ -12,6 +12,14 @@ if (newStamp && !stamps.includes(newStamp)) {
   stamps.push(newStamp);
   localStorage.setItem("stamps", JSON.stringify(stamps));
   alert(`スタンプ${newStamp}をゲットしました！`);
+fetch("http://localhost:3000/api/stamp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ stamp: newStamp })
+  })
+  .then(res => res.json())
+  .then(data => console.log("サーバー応答:", data))
+  .catch(err => console.error("送信エラー:", err));
 }
 
 // スタンプボタンの生成
