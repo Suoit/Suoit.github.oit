@@ -1,3 +1,4 @@
+/* ===== 基本スタイル (style.css) ===== */
 body {
   font-family: "Noto Sans JP", sans-serif;
   margin: 0;
@@ -32,27 +33,50 @@ h1, h2 {
   margin-top: 1rem;
 }
 
-.stamp {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px dashed #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.stamp.active {
-  background-color: #ffb347;
-  border: none;
-  color: white;
-}
-
 footer {
   background: #444;
   color: white;
   padding: 1rem;
   font-size: 0.9rem;
+}
+
+/* ===== スタンプボタン (style2.css +統合) ===== */
+/* 統合: .stamp と .stamp-btn を整理 */
+.stamp, .stamp-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 24px;
+  background: white;
+  transition: all 0.3s;
+  cursor: not-allowed;
+}
+
+.stamp.active, .stamp-btn.active {
+  background-color: #ffb347;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== 景品ボタン (style2.css) ===== */
+#reward-btn {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ccc;
+  color: white;
+  cursor: not-allowed;
+}
+
+#reward-btn.enabled {
+  background-color: #28a745;
+  cursor: pointer;
 }
