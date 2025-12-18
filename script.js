@@ -24,7 +24,7 @@ if (newStamp && !stamps.includes(newStamp)) {
     alert(`スタンプ ${newStamp} をゲットしました！`);
 
     // サーバーへ送信（バックアップとログ用）
-    fetch("https://suoit-github-oit.onrender.com/", {
+    fetch("https://suoit-github-oit.onrender.com/api/stamp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
