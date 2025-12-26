@@ -108,3 +108,16 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+// ★追加機能：データを初期化する (管理者用)
+// https://...onrender.com/reset-data にアクセスすると削除されます
+app.get('/reset-data', (req, res) => {
+    try {
+        const emptyData = [];
+        fs.writeFileSync(DATA_FILE, JSON.stringify(emptyData, null, 2));
+        console.log("⚠️ データを初期化しました");
+        res.send('<h1>✅ データの初期化が完了しました</h1><a href="/stats">統計に戻る</a>');
+    } catch (err) {
+        res.status(500).send("初期化失敗: " + err);
+    }
+});
