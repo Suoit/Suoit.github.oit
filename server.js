@@ -63,39 +63,32 @@ app.post('/api/stamp', (req, res) => {
 app.get('/stats', (req, res) => {
     const db = loadData();
     
-    // スタンプごとの回数を集計
+    // 1. 集計用HTML作成
     const stats = {};
-    db.forEach(item => {
-        const key = item.stamp; // スタンプID (例: "1")
-        stats[key] = (stats[key] || 0) + 1;
-    });
+    db.forEach(item => { stats[item.stamp] = (stats[item.stamp] || 0) + 1; });
+    const tableStats = Object.keys(stats).sort().map(key => 
+        `<tr><td>No. ${key}</td><td>${stats[key]} 人</td></tr>`
+    ).join('');
 
-    // 見やすいHTMLで返す
-    let html = `
-        <html>
-            <head>
-                <meta charset="utf-8">
-                <style>
-                    body { font-family: sans-serif; padding: 20px; }
-                    table { border-collapse: collapse; width: 100%; max-width: 400px; }
-                    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-                    th { background: #eee; }
-                </style>
-            </head>
-            <body>
-                <h1>📊 スタンプ利用状況</h1>
-                <table>
-                    <tr><th>スタンプ番号</th><th>取得人数</th></tr>
-                    ${Object.keys(stats).sort().map(key => 
-                        `<tr><td>No. ${key}</td><td>${stats[key]} 人</td></tr>`
-                    ).join('')}
-                </table>
-                <p>総ログ数: ${db.length} 件</p>
-                <a href="/api/raw-data">生データを見る(JSON)</a>
-            </body>
-        </html>
-    `;
-    res.send(html);
+    // 2. 履歴用HTML作成
+    const tableHistory = [...db].reverse().map(item => `
+        <tr>
+            <td class="time">${item.time || '不明'}</td>
+            <td><strong>No. ${item.stamp}</strong></td>
+            <td style="font-family:monospace; font-size:0.8em;">${item.userId}</td>
+        </tr>
+    `).join('');
+
+    // 3. HTMLファイルを読み込んで置換する
+    try {
+        let html = fs.readFileSync('./stats.html', 'utf8');
+        html = html.replace('{{TABLE_STATS}}', tableStats);
+        html = html.replace('{{TABLE_HISTORY}}', tableHistory);
+        html = html.replace('{{TOTAL_COUNT}}', db.length);
+        res.send(html);
+    } catch (err) {
+        res.status(500).send("HTMLの読み込みに失敗しました");
+    }
 });
 
 // ★追加機能：生データ確認用 (JSON)
@@ -121,3 +114,4 @@ app.get('/reset-data', (req, res) => {
         res.status(500).send("初期化失敗: " + err);
     }
 });
+
